@@ -18,10 +18,10 @@ class LoginRequest(BaseModel):
     password: str
 
 class Jogo(BaseModel):
-    nome: str
-    tipo: str
+    nome: str = Field(..., min_length=1)
+    tipo: str = Field(..., min_length=1)
     nota: int = Field(..., ge=1, le=10)
-    review: str
+    review: str = Field(..., min_length=1)
 
 jogos = [
     {"id": 1, "nome": "The Legend of Zelda", "tipo": "Aventura", "nota": 10, "review": "Um clássico absoluto."},
