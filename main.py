@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 import uuid
 
 app = FastAPI()
@@ -20,13 +20,14 @@ class LoginRequest(BaseModel):
 class Jogo(BaseModel):
     nome: str
     tipo: str
-    nota: int
+    nota: int = Field(..., ge=1, le=10)
     review: str
 
 jogos = [
     {"id": 1, "nome": "The Legend of Zelda", "tipo": "Aventura", "nota": 10, "review": "Um clássico absoluto."},
     {"id": 2, "nome": "FIFA 23", "tipo": "Esporte", "nota": 7, "review": "Bom para jogar com amigos."}
 ]
+
 next_id = 3
 
 @app.post("/login")
